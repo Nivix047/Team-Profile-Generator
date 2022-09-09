@@ -6,6 +6,8 @@ const fs = require("fs");
 // Employee is an abstract class in CS
 const generateHTML = require("./src/generateHTML");
 const Manager = require("./lib/manager");
+const Engineer = require("./lib/engineer");
+const Intern = require("./lib/intern");
 
 // CSS is predetermined, CSS should be included in folder
 
@@ -22,22 +24,22 @@ const app = () => {
         {
           type: "input",
           name: "name",
-          message: "What is the manager's name?",
+          message: "What is your name?",
         },
         {
           type: "input",
           name: "id",
-          message: "What is the engineer's employee id?",
+          message: "What is your id number?",
         },
         {
           type: "input",
           name: "email",
-          message: "What is the engineer's email address?",
+          message: "What is your email address?",
         },
         {
           type: "input",
           name: "office",
-          message: "What is the engineer's office number?",
+          message: "What is your office number?",
         },
       ])
       .then((answers) => {
@@ -56,6 +58,7 @@ const app = () => {
         console.log(error.message);
       });
   };
+
   const createTeam = () => {
     inquirer
       .prompt([
@@ -103,19 +106,74 @@ const app = () => {
           message: "What is the engineer's github?",
         },
       ])
-      .then();
+      .then((answers) => {
+        const engineer = new Engineer(
+          answers.name,
+          answers.id,
+          answers.email,
+          answers.github
+        );
+        teamMembers.push(engineer);
+        validateID.push(answers.id);
+        createTeam();
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
   };
-  const createIntern = () => {};
-  const writeToFileHTML = () => {};
-
+  const createIntern = () => {
+    inquirer
+      .prompt([
+        {
+          type: "input",
+          name: "name",
+          message: "What is the intern's name?",
+        },
+        {
+          type: "input",
+          name: "id",
+          message: "What is the intern's employee id?",
+        },
+        {
+          type: "input",
+          name: "email",
+          message: "What is the intern's email address?",
+        },
+        {
+          type: "input",
+          name: "school",
+          message: "What school does the intern attend to?",
+        },
+      ])
+      .then((answers) => {
+        const intern = new Intern(
+          answers.name,
+          answers.id,
+          answers.email,
+          answers.school
+        );
+        teamMembers.push(intern);
+        validateID.push(answers.id);
+        createTeam();
+      })
+      .catch((error) => {
+        console.log(error.message);
+      });
+  };
+  // Create a function to write HTML
+  const writeToFileHTML = () => {
+    console.log(teamMembers);
+    fs.writeFileSync(
+      path.join(process.cwd(), "/dist/team.html"),
+      generateHTML(teamMembers)
+    );
+    console.log("Saved: your file is in the dist folder");
+  };
   createManager();
 };
 
-// Create a function to write HTML
-const writeToFileHTML = () => {};
-
 // Create a function to initialize app
-init();
+app();
 
 // make directory
 // validation
