@@ -59,13 +59,6 @@ const generateTeam = (team) => {
   console.log("----generateManager(team[0]))----");
   console.log(generateManager(team[0]));
 
-  console.log("----filter----");
-  console.log(
-    team.filter((employee) => {
-      employee.getRole() === "Engineer";
-    })
-  );
-
   html.push(
     team
       .filter((employee) => employee.getRole() === "Engineer")
