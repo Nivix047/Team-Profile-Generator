@@ -27,9 +27,9 @@ const generateTeam = (team) => {
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">ID: ${engineer.getId()}</li>
-      <li class="list-group-item">Email: ${engineer.getEmail()}</li>
-      <li class="list-group-item">GitHub: https://github.com/${engineer.getGithub()} </li>
-    </ul>
+      <li class="list-group-item">Email: <a href="mailto:${engineer.getEmail()}">${engineer.getEmail()}</a></li>
+      <li class="list-group-item">GitHub: <a href="https://github.com/${engineer.getGithub()}">${engineer.getGithub()}</a></li>
+      </ul>
   </div>
 </article>`;
   };
@@ -58,9 +58,11 @@ const generateTeam = (team) => {
   console.log(team);
   console.log("----generateManager(team[0]))----");
   console.log(generateManager(team[0]));
+  console.log(typeof generateManager(team[0]));
 
   html.push(
     team
+      // This is where generate(Engineer() is getting called
       .filter((employee) => employee.getRole() === "Engineer")
       .map((engineer) => generateEngineer(engineer))
       .join("")
@@ -71,11 +73,14 @@ const generateTeam = (team) => {
       .map((intern) => generateIntern(intern))
       .join("")
   );
+  console.log("----html----");
   console.log(html);
   console.log(html.join(""));
   return html.join("");
 };
-
+// node way of doing anonymous function
+// module.exports is the anonymous way to generate (generateHTML.js)
+// module.exports fires off first
 module.exports = (team) => {
   console.log(team);
   return `<!DOCTYPE html>
@@ -116,3 +121,5 @@ module.exports = (team) => {
   
   `;
 };
+
+// map: applies a function to every element in the data structure is supply to it // usually an array // it does create a new array but is a array that results the function from it

@@ -2,14 +2,13 @@ const path = require("path");
 const inquirer = require("inquirer");
 const fs = require("fs");
 
-// Need 3 functions: createManagerHTML, createEngineer, createIntern.
 // Employee is an abstract class in CS
+// CSS is predetermined, CSS should be included in folder
+
 const generateHTML = require("./src/generateHTML");
 const Manager = require("./lib/manager");
 const Engineer = require("./lib/engineer");
 const Intern = require("./lib/intern");
-
-// CSS is predetermined, CSS should be included in folder
 
 const teamMembers = [];
 //for validation
@@ -25,21 +24,52 @@ const app = () => {
           type: "input",
           name: "name",
           message: "What is your name?",
+          validate: (answer) => {
+            if (answer !== "") {
+              return true;
+            }
+            return "Please return at least one character";
+          },
         },
         {
           type: "input",
           name: "id",
           message: "What is your id number?",
+          validate: (answer) => {
+            const id = answer.match(/^[1-9]\d*$/);
+            if (id) {
+              if (validateID.includes(answer)) {
+                return "This ID is already taken";
+              } else {
+                return true;
+              }
+            }
+            return "Please enter a number greater than zero";
+          },
         },
         {
           type: "input",
           name: "email",
           message: "What is your email address?",
+          validate: (answer) => {
+            const email = answer.match(/\S+@\S+\.\S+/);
+            if (email) {
+              return true;
+            }
+            return "Please enter valid email address";
+          },
         },
         {
           type: "input",
           name: "office",
           message: "What is your office number?",
+          validate: (answer) => {
+            const office = answer.match(/^[1-9]\d*$/);
+            if (office) {
+              return true;
+            }
+            return "Please enter a valid office number";
+          },
         },
       ])
       .then((answers) => {
@@ -89,6 +119,12 @@ const app = () => {
           type: "input",
           name: "name",
           message: "What is the engineer's name?",
+          validate: (answer) => {
+            if (answer !== "") {
+              return true;
+            }
+            return "Please return at least one character";
+          },
         },
         {
           type: "input",
@@ -104,6 +140,12 @@ const app = () => {
           type: "input",
           name: "github",
           message: "What is the engineer's github?",
+          validate: (answer) => {
+            if (answer !== "") {
+              return true;
+            }
+            return "Please return at least one character";
+          },
         },
       ])
       .then((answers) => {
@@ -143,9 +185,16 @@ const app = () => {
           type: "input",
           name: "school",
           message: "What school does the intern attend to?",
+          validate: (answer) => {
+            if (answer !== "") {
+              return true;
+            }
+            return "Please return at least one character";
+          },
         },
       ])
       .then((answers) => {
+        // instantiating a new intern object using the intern class and its constructor
         const intern = new Intern(
           answers.name,
           answers.id,
@@ -162,6 +211,7 @@ const app = () => {
   };
   // Create a function to write HTML
   const writeToFileHTML = () => {
+    console.log("----teamMembers----");
     console.log(teamMembers);
     fs.writeFileSync(
       path.join(process.cwd(), "/dist/team.html"),
@@ -176,6 +226,4 @@ const app = () => {
 app();
 
 // make directory
-// validation
-// filter // map
 // database
