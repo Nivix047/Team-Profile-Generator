@@ -7,10 +7,11 @@ const generateTeam = (team) => {
         style="background-color: blue; color: white"
       >
         <h2>${manager.getName()}</h2>
+        <h3><i class="fa-solid fa-mug-hot"></i> Manager<h3> 
       </div>
       <ul class="list-group list-group-flush">
         <li class="list-group-item">ID: ${manager.getId()}</li>
-        <li class="list-group-item">Email: ${manager.getEmail()}</li>
+        <li class="list-group-item">Email: <a href="mailto:${manager.getEmail()}">${manager.getEmail()}</a></li>
         <li class="list-group-item">Office Number: ${manager.getOffice()}</li>
       </ul>
     </div>
@@ -24,6 +25,7 @@ const generateTeam = (team) => {
       style="background-color: blue; color: white"
     >
       <h2>${engineer.getName()}</h2>
+      <h3><i class="fa-solid fa-glasses"></i> Engineer<h3>
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">ID: ${engineer.getId()}</li>
@@ -41,10 +43,11 @@ const generateTeam = (team) => {
       style="background-color: blue; color: white"
     >
       <h2>${intern.getName()}</h2>
+      <h3><i class="fa-solid fa-user-graduate"></i> Intern<h3> 
     </div>
     <ul class="list-group list-group-flush">
       <li class="list-group-item">ID: ${intern.getId()}</li>
-      <li class="list-group-item">Email: ${intern.getEmail()}</li>
+      <li class="list-group-item">Email: <a href="mailto:${intern.getEmail()}">${intern.getEmail()}</a></li>
       <li class="list-group-item">School: ${intern.getSchool()}</li>
     </ul>
   </div>
@@ -96,6 +99,7 @@ module.exports = (team) => {
         integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
         crossorigin="anonymous"
       />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha512-xh6O/CkQoPOWDdYTDqeRdPCVd1SpvCA9XXcUnZS2FmJNp1coAFzvtCN9BmamE+4aHK8yyUHUSCcJHgXloTyT2A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
       <title>Team Profile Generator</title>
       <link />
     </head>
