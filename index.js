@@ -130,11 +130,29 @@ const app = () => {
           type: "input",
           name: "id",
           message: "What is the engineer's employee id?",
+          validate: (answer) => {
+            const id = answer.match(/^[1-9]\d*$/);
+            if (id) {
+              if (validateID.includes(answer)) {
+                return "This ID is already taken";
+              } else {
+                return true;
+              }
+            }
+            return "Please enter a number greater than zero";
+          },
         },
         {
           type: "input",
           name: "email",
           message: "What is the engineer's email address?",
+          validate: (answer) => {
+            const email = answer.match(/\S+@\S+\.\S+/);
+            if (email) {
+              return true;
+            }
+            return "Please enter valid email address";
+          },
         },
         {
           type: "input",
@@ -170,16 +188,40 @@ const app = () => {
           type: "input",
           name: "name",
           message: "What is the intern's name?",
+          validate: (answer) => {
+            if (answer !== "") {
+              return true;
+            }
+            return "Please return at least one character";
+          },
         },
         {
           type: "input",
           name: "id",
           message: "What is the intern's employee id?",
+          validate: (answer) => {
+            const id = answer.match(/^[1-9]\d*$/);
+            if (id) {
+              if (validateID.includes(answer)) {
+                return "This ID is already taken";
+              } else {
+                return true;
+              }
+            }
+            return "Please enter a number greater than zero";
+          },
         },
         {
           type: "input",
           name: "email",
           message: "What is the intern's email address?",
+          validate: (answer) => {
+            const email = answer.match(/\S+@\S+\.\S+/);
+            if (email) {
+              return true;
+            }
+            return "Please enter valid email address";
+          },
         },
         {
           type: "input",
@@ -224,6 +266,3 @@ const app = () => {
 
 // Create a function to initialize app
 app();
-
-// make directory
-// database
