@@ -8,6 +8,8 @@ The team profile generator generates profile cards from the perspective of the m
 
 Please use the link below to watch a demonstration of how the app works.
 
+https://youtu.be/s-QZdvV4jS0
+
 ## Screenshots
 
 <img width="1431" alt="Screen Shot 2022-09-13 at 6 33 31 PM" src="https://user-images.githubusercontent.com/97267318/190038792-8334ab30-74c5-450e-9467-cde29a608458.png">
